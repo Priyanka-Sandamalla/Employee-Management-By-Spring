@@ -11,7 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
-
+import lombok.Data;
+@Data
 @Entity
 public class Employee {
 	@Id
