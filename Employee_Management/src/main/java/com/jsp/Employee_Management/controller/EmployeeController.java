@@ -18,14 +18,22 @@ public class EmployeeController {
 	@Autowired
 	ModelMapper mapper;
 	@PostMapping("/register")
-	public Employee register(@RequestBody Employee e) {
-		return service.saveEmp(e);
+	public EmployeeClone register(@RequestBody Employee e) {
+		Employee register = service.saveEmp(e);
+		try {
+			EmployeeClone ec = m1(register);
+			return ec;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		
 	}
 	
 	@PostMapping("/emp")
-	public EmployeeClone m1(@RequestBody EmployeeClone u) {
+	public EmployeeClone m1(@RequestBody Employee e) {
 		
-		 EmployeeClone c = mapper.map(u, EmployeeClone.class);
+		 EmployeeClone c = mapper.map(e, EmployeeClone.class);
 		return c;
 		
 	}
