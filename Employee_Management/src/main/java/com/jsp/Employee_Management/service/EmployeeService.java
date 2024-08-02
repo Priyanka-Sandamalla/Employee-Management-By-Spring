@@ -33,10 +33,10 @@ public class EmployeeService {
 	    MimeMessage message = mailsender.createMimeMessage();
 
 	    message.setFrom(new InternetAddress("priyankasandamalla3@gmail.com"));
-	    message.setRecipients(MimeMessage.RecipientType.TO, "sandamallapriyanka@gmail.com");
+	    message.setRecipients(MimeMessage.RecipientType.TO, emp.getEmail());
 	    message.setSubject("Test email from Spring");
 
-	    String htmlContent = "<h1>Hi...,</h1>" +
+	    String htmlContent = "<h1>Hi " +emp.getFirstName()+",</h1>"+
                 "<p>Thank you for your interest in the <strong>Software Engineer</strong> position at <strong>Tech Mahindra</strong>. " +
                 "We have received your application and appreciate the time you took to apply. " +
                 "Our team will review your qualifications and get back to you if your profile matches our needs. " +

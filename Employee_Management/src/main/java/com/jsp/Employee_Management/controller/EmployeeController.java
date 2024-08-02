@@ -21,8 +21,8 @@ public class EmployeeController {
 	public EmployeeClone register(@RequestBody Employee e) {
 		Employee register = service.saveEmp(e);
 		try {
-			EmployeeClone ec = m1(register);
-			return ec;
+			 
+			return m1(register); 
 		}catch(Exception ex) {
 			ex.printStackTrace();
 			return null;

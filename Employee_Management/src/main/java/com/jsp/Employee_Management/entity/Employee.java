@@ -23,8 +23,11 @@ public class Employee {
 	 private Date dateOfBirth;
 	 private String gender;
 	 private int age;
+	 @Column(unique = true)
 	 private long phoneNumber;
+	 @Column(unique = true)
 	 private String email;
+	 @Column(unique = true)
 	 private String password;
 	 private String address;
 	 @Lob
