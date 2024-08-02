@@ -1,11 +1,15 @@
 package com.jsp.Employee_Management.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.jsp.Employee_Management.dao.EmployeeDao;
 import com.jsp.Employee_Management.entity.Employee;
+import com.jsp.Employee_Management.exception.IdNotFound;
+import com.jsp.Employee_Management.util.ResponseStructure;
 
 
 import jakarta.mail.MessagingException;
@@ -47,5 +51,27 @@ public class EmployeeService {
 
 	    mailsender.send(message);
 	}
-
+	
+	public ResponseEntity<ResponseStructure<Employee>> findById(int id){
+		Employee db = dao.fetchById(id);
+		if(db!=null) {
+		ResponseStructure<Employee> rs = new ResponseStructure<Employee>();
+		rs.setStateCode(HttpStatus.CREATED.value());
+		rs.setData(dao.fetchById(id));
+		rs.setMessage("id   find  Sucessfully..!");
+		return new ResponseEntity<ResponseStructure<Employee>>(rs,HttpStatus.CREATED);
+		}else {
+			throw new IdNotFound();
+		}
+	}
+	
+	
+	public ResponseEntity<ResponseStructure<Employee>> delete(int id) {
+		
+		ResponseStructure<Employee> rs = new ResponseStructure<Employee>();
+		rs.setStateCode(HttpStatus.CREATED.value());
+		rs.setData(dao.fetchById(id));
+		rs.setMessage("id find  Sucessfully..!");
+		return new ResponseEntity<ResponseStructure<Employee>>(rs,HttpStatus.CREATED);
+	}
 }

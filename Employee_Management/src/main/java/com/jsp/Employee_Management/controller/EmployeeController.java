@@ -2,13 +2,19 @@ package com.jsp.Employee_Management.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jsp.Employee_Management.clone.EmployeeClone;
 import com.jsp.Employee_Management.entity.Employee;
 import com.jsp.Employee_Management.service.EmployeeService;
+import com.jsp.Employee_Management.util.ResponseStructure;
+
 
 
 @RestController
@@ -46,6 +52,15 @@ public class EmployeeController {
 			}catch(Exception e){
 				return "internal issue try again";
 			}
+		}
+	 @GetMapping("/find")
+		public ResponseEntity<ResponseStructure<Employee>> findById(@RequestParam int id){
+			return service.findById(id);
+		}
+	 
+	 	@DeleteMapping("/delete")
+		public ResponseEntity<ResponseStructure<Employee>> deleteEmployee(@RequestParam int id){
+			return service.delete(id);
 		}
 	
 
